@@ -113,5 +113,6 @@ module.exports = {
         }),
 
         new CleanWebpackPlugin()
-    ].concat(htmlWebpackPlugins)
+    ].concat(htmlWebpackPlugins),
+    //devtool: 'source-map'
 };

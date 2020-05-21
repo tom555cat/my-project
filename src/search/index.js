@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import logo from './images/logo.png';
 import './search.less';
 import { common } from '../../common';
-
+import {a} from './tree-shaking';
 common();
 
 class Search extends React.Component {

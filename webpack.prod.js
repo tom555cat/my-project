@@ -59,6 +59,7 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: '[name]_[chunkhash:8].js'
     },
+    // mode为'none'时关闭了tree-shaking
     mode: 'production',
     module: {
         rules: [

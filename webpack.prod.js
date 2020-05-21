@@ -29,6 +29,7 @@ const setMPA = () => {
                 new HtmlWebpackPlugin({
                     template: path.join(__dirname, `src/${pageName}/index.html`),
                     filename: `${pageName}.html`,
+                    // 抽取出来的包需要在这里加进去
                     chunks: ['vendors', pageName],
                     inject: true,
                     minify: {
@@ -132,12 +133,15 @@ module.exports = {
     ].concat(htmlWebpackPlugins),
     optimization: {
         splitChunks: {
+            // 提取包大小不设下限
+            minSize: 0,
             cacheGroups: {
                 commons: {
-                    // 提取react和react-dom到一个叫vendors的包里面
-                    test: /(react|react-dom)/,
-                    name: 'vendors',
-                    chunks: 'all'
+                    // 公共包命名为'commons'
+                    name: 'commons',
+                    chunks: 'all',
+                    // 最小引用2次
+                    minChunks: 2
                 }
             }
         }

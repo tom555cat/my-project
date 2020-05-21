@@ -29,7 +29,7 @@ const setMPA = () => {
                 new HtmlWebpackPlugin({
                     template: path.join(__dirname, `src/${pageName}/index.html`),
                     filename: `${pageName}.html`,
-                    chunks: [pageName],
+                    chunks: ['vendors', pageName],
                     inject: true,
                     minify: {
                         html5: true,
@@ -113,22 +113,33 @@ module.exports = {
             cssProcessor: require('cssnano')
         }),
         new CleanWebpackPlugin(),
-        new HtmlWebpackExternalsPlugin({
-            externals: [
-              {
-                module: 'react',
-                // CDN上的react包地址
-                entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
-                global: 'React',
-              },
-              {
-                module: 'react-dom',
-                // CDN上的ReactDOM包地址
-                entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
-                global: 'ReactDOM',
-              }
-            ],
-        }),
+        // new HtmlWebpackExternalsPlugin({
+        //     externals: [
+        //       {
+        //         module: 'react',
+        //         // CDN上的react包地址
+        //         entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+        //         global: 'React',
+        //       },
+        //       {
+        //         module: 'react-dom',
+        //         // CDN上的ReactDOM包地址
+        //         entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+        //         global: 'ReactDOM',
+        //       }
+        //     ],
+        // }),
     ].concat(htmlWebpackPlugins),
-    //devtool: 'source-map'
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    // 提取react和react-dom到一个叫vendors的包里面
+                    test: /(react|react-dom)/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
+    }
 };

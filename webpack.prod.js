@@ -60,6 +60,7 @@ module.exports = {
         filename: '[name]_[chunkhash:8].js'
     },
     // mode为'none'时关闭了tree-shaking
+    // mode为'none'时关闭了scope-hoisting
     mode: 'production',
     module: {
         rules: [

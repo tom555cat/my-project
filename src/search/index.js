@@ -10,9 +10,28 @@ common();
 
 class Search extends React.Component {
 
+    constructor() {
+        super(...arguments);
+
+        this.state = {
+            Text: null
+        };
+    }
+
+    loadComponent() {
+        import('./text.js').then((Text)=> {
+            this.setState({
+                Text: Text.default
+            });
+        });
+    }
+
     render() {
         debugger;
         return <div className="search-text">
+            {
+                Text ? <Text /> : null
+            }
             搜索文字的内容<img src={ logo } />
         </div>;
     }

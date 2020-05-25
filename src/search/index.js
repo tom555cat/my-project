@@ -5,8 +5,10 @@ import ReactDOM from 'react-dom';
 import logo from './images/logo.png';
 import './search.less';
 import { common } from '../../common';
+import { anotherCommon } from '../../anotherCommon';
 import {a} from './tree-shaking';
 common();
+anotherCommon();
 
 class Search extends React.Component {
 
